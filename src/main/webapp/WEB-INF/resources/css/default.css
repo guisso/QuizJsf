@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@600&display=swap');
+
+* {
+    font-family: 'Josefin Slab', serif;
+}
+
+h1 {
+    border-bottom: 1px solid #AFAFAF; 
+}
+
+a:link, a:visited {
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+    color: #045491;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+table#questionarios {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    border: solid thin navy;
+    border-collapse: collapse;
+}
+
+table#questionarios thead th,
+table#questionarios tbody td {
+    border: solid thin navy;
+    padding: .5em .1em;
+}
+
+/* Exceto pela coluna dois, as demais alinham o texto ao centro */
+table#questionarios thead th:not(:nth-child(2)),
+table#questionarios tbody td:not(:nth-child(2)) {
+    text-align: center;
+}
+
+
+/* todos os elementos dentro de um elemento da classe azul escuro*/
+/* .azulescuro * { */
+
+/* itálicos dentro de links dentro de elementos da classe azul escuro */
+.azulescuro a i {
+    color: darkblue;
+}
+
+.verdeescuro a i {
+    color: darkgreen;
+}
+
+/* itálicos dentro de links dentro da 3a coluna do corpo de uma tabela de id 'questionarios' */
+/*table#questionarios tbody td:nth-child(3) a i {
+    color: orange;
+}*/
+
+h3.questao {
+    border-top: dashed medium gray;
+    border-bottom: dashed medium gray;
+    margin-top: 2.5em;
+    padding: .5em;
+}
+
+form.questoes fieldset {
+    border: none;
+    border-left: solid 4px #036fab;
+    padding: 0 1em 1em;
+}
+
+form.questoes fieldset:nth-child(even) {
+    background-color: white;
+}
+
+form.questoes input[type=submit] {
+    color: white;
+    background-color: #036fab;
+    margin: 1em auto;
+    display: block;
+    width: 12em;
+}
+
+input[type=submit].encerrar {
+    color: white;
+    background-color: #006666;
+    margin: 1em auto;
+    display: block;
+    width: 12em;
+}

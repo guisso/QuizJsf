@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    template="./WEB-INF/templates/default.xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewParam 
+                name="questionario" 
+                value="#{questionarioControllerBean
+                         .questionarioSelecionadoId}" />
+        </f:metadata>
+
+        <h1>Questões</h1>
+
+        <c:forEach 
+            items="#{questionarioControllerBean
+                     .questionarioSelecionado
+                     .questoes}" 
+            var="questao"
+            varStatus="questaoIdx">
+            <!--<ui:repeat 
+            value="#{questionarioControllerBean
+                     .questionarioSelecionado
+                     .questoes}" 
+            var="questao"
+            varStatus="questaoIdx">-->
+
+            <h3 class="questao">Questão #{questaoIdx.index + 1}</h3>
+
+            <p>#{questao.enunciado}</p>
+
+            <h:form styleClass="questoes">
+                <!--Para múltiplos formulários em uma mesma 
+                página, ui:repeat apresenta uma falha
+                e somente o último formulário é executado
+                corretamente. É um bug no salvament do
+                estado dos componentes para o ui:repeat.-->
+                <c:forEach
+                    items="#{questao.alternativas}"
+                    var="alternativa"
+                    varStatus="alternativaIdx">
+                    <!--<ui:repeat
+                    value="#{questao.alternativas}"
+                    var="alternativa"
+                    varStatus="alternativaIdx">-->
+
+                    <fieldset>
+                        <p>#{questionarioControllerBean
+                             .toChar(alternativaIdx.index)})
+                            #{alternativa.enunciado}</p>
+
+                        <h:selectOneRadio 
+                            layout="pageDirection"
+                            value="#{alternativa.resposta}">
+                            <f:selectItem
+                                itemValue="true"
+                                itemLabel="Verdadeiro" />
+                            <f:selectItem
+                                itemValue="false"
+                                itemLabel="Falso" />
+                        </h:selectOneRadio>
+
+                    </fieldset>
+
+                </c:forEach>
+                <!--</ui:repeat>-->
+                <!--FIM alternativas-->
+
+                <h:commandButton
+                    value="Salvar Questão #{questaoIdx.index + 1}"
+                    action="questoes" />
+            </h:form>
+
+        </c:forEach>
+        <!--</ui:repeat>-->
+        <!--FIM questões-->
+
+        <h:form>
+            <p style="width:15em;color:#006666; text-align: center;margin:0 auto;">
+                <i class="fas fa-exclamation-triangle"></i><br/>
+                <i>Suas respostas não são computadas se você não salvar cada questão</i>
+            </p>
+            <h:commandButton
+                value="Encerrar"
+                action="resultado"
+                styleClass="encerrar" />
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
